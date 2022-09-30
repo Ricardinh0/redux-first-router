@@ -537,12 +537,12 @@ exports.default = function () {
     };
   };
 
-  var _historyAttemptDispatchAction = function _historyAttemptDispatchAction(store, location, historyAction) {
+  var _historyAttemptDispatchAction = function _historyAttemptDispatchAction(store, update) {
     // IMPORTANT: insure middleware hasn't already handled location change:
-    var nextPath = (0, _pathnamePlusSearch2.default)(location);
+    var nextPath = (0, _pathnamePlusSearch2.default)(update.location);
 
     if (nextPath !== currentPath) {
-      var kind = historyAction === 'REPLACE' ? 'redirect' : historyAction;
+      var kind = update.action === "REPLACE" ? "redirect" : update.action;
 
       // THE MAGIC: parse the address bar path into a matched action
       var action = (0, _historyCreateAction2.default)(nextPath, routesMap, prevLocation, history, kind.toLowerCase(), querySerializer, currentPath, prevLength);

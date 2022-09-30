@@ -43,9 +43,10 @@ import type {
   Location,
   LocationState,
   History,
-  HistoryLocation,
+  // HistoryLocation,
   Document,
-  Store
+  Store,
+  HistoryUpdate
 } from './flow-types'
 
 const __DEV__ = process.env.NODE_ENV !== 'production'
@@ -562,14 +563,13 @@ export default (routesMap: RoutesMap = {}, options: Options = {}) => {
 
   const _historyAttemptDispatchAction = (
     store: Store,
-    location: HistoryLocation,
-    historyAction: string
+    update: HistoryUpdate
   ) => {
     // IMPORTANT: insure middleware hasn't already handled location change:
-    const nextPath = pathnamePlusSearch(location)
+    const nextPath = pathnamePlusSearch(update.location);
 
     if (nextPath !== currentPath) {
-      const kind = historyAction === 'REPLACE' ? 'redirect' : historyAction
+      const kind = update.action === "REPLACE" ? "redirect" : update.action;
 
       // THE MAGIC: parse the address bar path into a matched action
       const action = historyCreateAction(

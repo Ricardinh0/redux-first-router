@@ -217,3 +217,9 @@ export type HistoryAction = string
 export type Document = Object // eslint-disable-line no-undef
 
 export type Store = ReduxStore<*, *>
+
+export type HistoryUpdate = {
+  location: HistoryLocation,
+  action: HistoryAction,
+};
+
